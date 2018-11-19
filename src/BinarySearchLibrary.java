@@ -28,14 +28,26 @@ public class BinarySearchLibrary {
 	 * if there is no such object in list.
 	 */
 	
+	
 	public static <T>
     	int firstIndex(List<T> list, 
 	               	T target, Comparator<T> comp) {
+		if(list == null){return -1;}
+		if(! list.contains(target)){return -1;}
 		
 		int low = -1;
-		int high = list.size()-1;
-		// (low,high] contains target
-		// TODO: complete method
+		int high = list.size() - 1;
+		while(low + 1 != high){
+			int mid = (low + high)/2;
+			T myMid = list.get(mid);
+			int cmp  = comp.compare(myMid,target);
+			if(cmp < 0){low = mid;}
+			else{ high = mid;}
+			
+		}
+		if(comp.compare(target, list.get(high))==0){
+			return high;
+		}
 		
 		return -1;
 	}
@@ -55,12 +67,23 @@ public class BinarySearchLibrary {
 	public static <T>
 	int lastIndex(List<T> list, 
                	  T target, Comparator<T> comp) {
-		
+		if(list == null){return -1;}
+		if(! list.contains(target)){return -1;}
 		int low = 0;
 		int high = list.size();
+		while(low + 1 != high){
+			int mid = (low + high)/2;
+			T myMid = list.get(mid);
+			int cmp  = comp.compare(myMid,target);
+			if(cmp > 0){high = mid;}
+			else{ low = mid;}
+			
+		}
+		if(comp.compare(target, list.get(low))==0){
+			return low;
+		}
 		
-		// target in [low,high)
-		// TODO: complete method
+	
 		return -1;
 	}
 	
